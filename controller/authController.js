@@ -13,7 +13,7 @@ exports.sendOtp = async (req, res) => {
   try {
     const { phone } = req.body;
     if (!phone) {
-      return res.status(400).json({ message: "Phone number is required" });
+      return res.status(400).json({ message: "Phone number is required", success: false });
     }
 
     // Send OTP using Twilio's Verify service
@@ -22,12 +22,12 @@ exports.sendOtp = async (req, res) => {
       .verifications.create({ to: phone, channel: "sms" });
 
     if (verification.status === "pending") {
-      res.status(200).json({ message: "OTP sent successfully" });
+      res.status(200).json({ message: "OTP sent successfully", success: true });
     } else {
-      res.status(500).json({ message: "Failed to send OTP" });
+      res.status(500).json({ message: "Failed to send OTP", success: false });
     }
   } catch (error) {
     console.error("Error sending OTP:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
