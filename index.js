@@ -5,7 +5,7 @@ const path = require("path");
 
 const connectDB = require("./configurations/databaseConfig");
 const AuthRouter = require("./routes/auth");
-
+const Userrouter = require("./routes/user");
 const app = express();
 const PORT = process.env.PORT || 8800;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://localhost:3000";
@@ -23,6 +23,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", AuthRouter);
+app.use("/api/user", Userrouter);
 app.get("/hi", (req, res) => {
   console.log("hello bhidu");
   res.json("hi");

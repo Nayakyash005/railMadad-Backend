@@ -4,9 +4,13 @@ const env = require("dotenv");
 env.config();
 const connectDB = async () => {
   console.log(process.env.DATABASE_URL);
+
   const DATABASEURL = process.env.DATABASE_URL || "mongodb://localhost:27017/";
   try {
-    await mongoose.connect("mongodb://localhost:27017/");
+    await mongoose.connect(DATABASEURL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
     console.log("Database connected ✌");
   } catch (error) {

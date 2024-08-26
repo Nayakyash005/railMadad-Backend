@@ -4,17 +4,17 @@ const Schema = mongoose.Schema;
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 const userSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: [/^\S+@\S+\.\S+$/, "Please use a valid email address."],
-  },
-  password: {
-    type: String,
-    required: true,
-    select: false,
-  },
+  // email: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,
+  //   match: [/^\S+@\S+\.\S+$/, "Please use a valid email address."],
+  // },
+  // password: {
+  //   type: String,
+  //   required: true,
+  //   select: false,
+  // },
   firstName: {
     type: String,
     required: true,
@@ -27,16 +27,20 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-
-  gender: {
+  PNR: {
     type: String,
-    enum: ["Male", "Female"],
     required: true,
   },
-  isDeteted: {
-    type: boolean,
-    enum: [true, false],
-  },
+
+  // gender: {
+  //   type: String,
+  //   enum: ["Male", "Female"],
+  //   required: true,
+  // },
+  // isDeteted: {
+  //   type: boolean,
+  //   enum: [true, false],
+  // },
 
   // confirmPassword: {
   //   type: String,
