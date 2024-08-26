@@ -4,7 +4,7 @@ const path = require("path");
 const cors = require("cors");
 
 const connectDB = require("./configurations/databaseConfig");
-const { PhoneAuthRouter } = require("./routes/auth/phone");
+const { AuthRouter } = require("./routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -24,7 +24,7 @@ app.use(cookieParser());
 
 
 // Routes
-app.use("/api/auth/phone", PhoneAuthRouter);
+app.use("/api/auth", AuthRouter);
 
 
 
