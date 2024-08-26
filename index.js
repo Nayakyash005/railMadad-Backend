@@ -1,44 +1,39 @@
-const cookieParser = require("cookie-parser");
 const express = require("express");
-const path = require("path");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
 const connectDB = require("./configurations/databaseConfig");
-const { AuthRouter } = require("./routes/auth");
+const AuthRouter = require("./routes/auth");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8800;
 const FRONTEND_URL = process.env.FRONTEND_URL || "https://localhost:3000";
 
-// cors configuration
+// CORS configuration
 const corsOptions = {
   origin: FRONTEND_URL,
   credential: true,
 };
 
 // Middlewares
-// app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-
 // Routes
 app.use("/api/auth", AuthRouter);
-
-
-
-
-
-
+app.get("/hi", (req, res) => {
+  console.log("hello bhidu");
+  res.json("hi");
+});
 
 async function main() {
-  await connectDB();  // await database connection before listning to incomming request
-  
-  app.listen(PORT, () => {
-    console.log("your backend is runing on the port 8800");
-  });
+  await connectDB(); // await database connection before listening to incoming requests
 
+  app.listen(PORT, () => {
+    console.log(`Your backend is running on port ${PORT}`);
+  });
 }
 
 main();
