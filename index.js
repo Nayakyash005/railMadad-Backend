@@ -8,7 +8,7 @@ const AuthRouter = require("./routes/auth");
 const Userrouter = require("./routes/user");
 const app = express();
 const PORT = process.env.PORT || 8800;
-const FRONTEND_URL = process.env.FRONTEND_URL || "https://localhost:3000";
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
 // CORS configuration
 const corsOptions = {
