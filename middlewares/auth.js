@@ -19,7 +19,7 @@ async function isAuthenticated(req, res, next) {
   // TODO: check if user is logged in.
   // 1. check cookies for user data 
   // 2. parse user data and store it in req.body.user
-  // 3. return un-authenticated status
+  // 3. else return un-authenticated status.
 
   // ye sb @/api/auth/verify-otp controller me kr.
   try {
