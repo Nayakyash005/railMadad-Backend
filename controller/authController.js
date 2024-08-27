@@ -1,7 +1,6 @@
 const twilio = require("twilio");
 const env = require("dotenv");
 env.config();
-
 const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
 console.log("acc id ", twilioAccountSid);
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
@@ -9,7 +8,7 @@ const twilioServiceSid = process.env.TWILIO_SERVICE_ID;
 
 const client = twilio(twilioAccountSid, twilioAuthToken);
 
-exports.sendOtp = async (req, res) => {
+const sendOtp = async (req, res) => {
   try {
     const { phone } = req.body;
     if (!phone) {
@@ -31,3 +30,33 @@ exports.sendOtp = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
+
+const Complain = require('../models/Complain');
+
+const ComplaintControler = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { phone, discription, image_url, pnr } = req.body;
+
+    if (!phone || !discription || !image_url || !pnr) {
+      return res.status(400).send("All fields are required");
+    }
+
+    const complaint = new Complain({ phone, discription, image_url, pnr });
+    await complaint.save();
+
+    res.status(201).send({
+      success: true,
+      message: "Complaint registered successfully",
+      complaint,
+    });
+  } catch (error) {
+    console.error("Error during registration:", error.message);
+    res.status(500).send({
+      success: false,
+      message: 'Error in registration',
+      error: error.message,
+    });
+  }
+};
+module.exports = {sendOtp,ComplaintControler}

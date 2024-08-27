@@ -6,6 +6,7 @@ const path = require("path");
 const connectDB = require("./configurations/databaseConfig");
 const AuthRouter = require("./routes/auth");
 const Userrouter = require("./routes/user");
+const Complainrouter = require("./routes/complaint");
 const app = express();
 const PORT = process.env.PORT || 8800;
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
@@ -24,6 +25,10 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", AuthRouter);
 app.use("/api/user", Userrouter);
+app.use("/api/complaints", Complainrouter);
+
+
+
 app.get("/hi", (req, res) => {
   console.log("hello bhidu");
   res.json("hi");
